@@ -3,19 +3,18 @@ import data from "../../assets/flights.json"
 
 const initialState = {
     flights: data,
-    carriers: [],
+    carriers: [...new Set(data.result.flights.map(item => item.flight.carrier.caption))],
+    filteredFlights: []
+
 }
 
 export const filterSlice = createSlice({
     name: 'filter',
     initialState,
     reducers: {
-        getAllCarriers: (state) =>{
-            state.carriers = state.flights.result.flights.map(flight => {
-                let carriersArray = new Set()
-                carriersArray.add(flight.flight.carrier.caption)
-                return carriersArray
-            })
+        priceMitLimitFilter: (state, action) => {
+            state.filteredFlights = state.flights.result.flights.filter(
+                item => item.flight.price.total.amount >= action.payload)
         }
 
     }
