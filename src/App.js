@@ -1,5 +1,6 @@
 import base from "./assets/flights.json"
-import FiltersForm from "./components/filters-form/filters-form";
+import FlightList from "./components/flight-list/flight-list";
+import FilterForm from "./components/filter-form/filter-form";
 
 function App() {
 
@@ -9,7 +10,8 @@ function App() {
     //  console.log(state)
     return (
         <div className="App">
-            <FiltersForm/>
+            <FilterForm/>
+            <FlightList/>
         </div>
     );
 }
