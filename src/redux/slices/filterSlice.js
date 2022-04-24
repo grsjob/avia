@@ -30,11 +30,22 @@ export const filterSlice = createSlice({
                     item => Number(item.flight.price.total.amount) <= Number(action.payload))
             }
         },
+        carriersFilter: (state, action) => {
+            if(state.filteredFlights.length > 0){
+                state.filteredFlights = state.filteredFlights.filter(
+                    item => action.payload.includes(item.flight.carrier.caption)
+                )
+            } else {
+                state.filteredFlights = state.flights.result.flights.filter(
+                    item => action.payload.includes(item.flight.carrier.caption)
+                )
+            }
+        },
 
 
     }
 })
 
-export const {priceMinLimitFilter, priceMaxLimitFilter} = filterSlice.actions
+export const {priceMinLimitFilter, priceMaxLimitFilter, carriersFilter} = filterSlice.actions
 
 export default filterSlice.reducer
