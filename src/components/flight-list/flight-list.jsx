@@ -19,11 +19,19 @@ const FlightList = () => {
             {
                 filteredFlights.length > 0 ?
                     filteredFlights.map(route => {
-                        return <li key={route.flightToken}>{route.flight.price.total.amount}</li>
+                        return <li
+                            key={route.flightToken}>
+                            {route.flight.price.total.amount}
+                            {route.flight.carrier.caption}
+                        </li>
                     })
                     :
                     flights.map(route => {
-                        return <li key={route.flightToken}>{route.flight.price.total.amount}</li>
+                        return <li
+                            key={route.flightToken}>
+                            {route.flight.price.total.amount}
+                            {route.flight.carrier.caption}
+                        </li>
                     })
             }
 

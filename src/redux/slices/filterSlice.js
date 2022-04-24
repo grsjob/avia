@@ -13,7 +13,7 @@ export const filterSlice = createSlice({
     initialState,
     reducers: {
         priceMinLimitFilter: (state, action) => {
-            if(state.filteredFlights.length > 0){
+            if (state.filteredFlights.length > 0) {
                 state.filteredFlights = state.filteredFlights.filter(
                     item => Number(item.flight.price.total.amount) >= Number(action.payload))
             } else {
@@ -22,7 +22,7 @@ export const filterSlice = createSlice({
             }
         },
         priceMaxLimitFilter: (state, action) => {
-            if(state.filteredFlights.length > 0){
+            if (state.filteredFlights.length > 0) {
                 state.filteredFlights = state.filteredFlights.filter(
                     item => Number(item.flight.price.total.amount) <= Number(action.payload))
             } else {
@@ -31,9 +31,9 @@ export const filterSlice = createSlice({
             }
         },
         carriersFilter: (state, action) => {
-            if(state.filteredFlights.length > 0){
+            if (state.filteredFlights.length > 0) {
                 state.filteredFlights = state.filteredFlights.filter(
-                    item => action.payload.includes(item.flight.carrier.caption)
+                    item => action.payload.includes(item.flight.carrier.caption) //TODO если добавить галочку в уже отфильтрованный массив, то найти эту компанию невозможно
                 )
             } else {
                 state.filteredFlights = state.flights.result.flights.filter(
@@ -41,11 +41,25 @@ export const filterSlice = createSlice({
                 )
             }
         },
+        withoutTransferFilter : (state) =>{
+            if (state.filteredFlights.length > 0) {
+                state.filteredFlights = state.filteredFlights.filter(route => route.flight.legs[0].segments.length === 1)
+            } else {
+                state.filteredFlights = state.flights.result.flights.filter(route => route.flight.legs[0].segments.length === 1)
+            }
+        },
+        oneTransferFilter : (state) =>{
+            if (state.filteredFlights.length > 0) {
+                state.filteredFlights = state.filteredFlights.filter(route => route.flight.legs[0].segments.length === 2)
+            } else {
+                state.filteredFlights = state.flights.result.flights.filter(route => route.flight.legs[0].segments.length === 2)
+            }
+        },
 
 
     }
 })
 
-export const {priceMinLimitFilter, priceMaxLimitFilter, carriersFilter} = filterSlice.actions
+export const {priceMinLimitFilter, priceMaxLimitFilter, carriersFilter, withoutTransferFilter, oneTransferFilter} = filterSlice.actions
 
 export default filterSlice.reducer
