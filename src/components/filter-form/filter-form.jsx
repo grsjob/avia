@@ -4,18 +4,26 @@ import {
     priceMaxLimitFilter,
     priceMinLimitFilter,
     carriersFilter,
-    withoutTransferFilter, oneTransferFilter
+    withoutTransferFilter,
+    oneTransferFilter,
+    ascendingPriceSorting,
+    descendingPriceSorting,
+    byTimeSorting
 } from "../../redux/slices/filterSlice";
 import MinMaxFilter from "../min-max-filter/min-max-filter";
 import CarriersFilter from "../carriers-filter/carriers-filter";
 import TransferFilter from "../transfer-filter/transfer-filter";
+import Sort from "../sort/sort";
 
 const FilterForm = () => {
     const [minValue, setMinValue] = useState('');
     const [maxValue, setMaxValue] = useState('');
     const [selectedCarriers, setSelectedCarriers] = useState([])
-    const [transferCount, settransferCount] = useState([]);
+    const [transferCount, setTransferCount] = useState([]);
+    const [sorting, setSorting] = useState('');
     const dispatch = useDispatch()
+
+    console.log(sorting)
 
     const handlerSubmit = (e) => {
         e.preventDefault()
@@ -34,11 +42,20 @@ const FilterForm = () => {
 
         if(transferCount.includes('withoutTransfer')){
             dispatch((withoutTransferFilter()))
-            console.log(transferCount)
         }
         if(transferCount.includes('oneTransfer')){
             dispatch((oneTransferFilter()))
-            console.log(transferCount)
+        }
+        switch (sorting){
+            case 'ascendingPrice':
+                dispatch((ascendingPriceSorting()))
+                break
+            case 'descendingPrice':
+                dispatch((descendingPriceSorting()))
+                break
+            case 'byTime':
+                dispatch((byTimeSorting()))
+                break
         }
     }
 
@@ -50,7 +67,8 @@ const FilterForm = () => {
                 setMaxValue={setMaxValue}
             />
             <CarriersFilter setSelectedCarriers={setSelectedCarriers}/>
-            <TransferFilter settransferCount={settransferCount}/>
+            <TransferFilter settransferCount={setTransferCount}/>
+            <Sort setSorting={setSorting}/>
             <button type='submit'>Отфильтровать</button>
         </form>
     );

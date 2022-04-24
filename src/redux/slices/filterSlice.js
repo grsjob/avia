@@ -55,11 +55,47 @@ export const filterSlice = createSlice({
                 state.filteredFlights = state.flights.result.flights.filter(route => route.flight.legs[0].segments.length === 2)
             }
         },
+        ascendingPriceSorting: (state) =>{
+            if(state.filteredFlights.length > 0){
+                state.filteredFlights = state.filteredFlights.sort((a, b)=> a.flight.price.total.amount - b.flight.price.total.amount)
+            } else {
+                state.filteredFlights = state.flights.result.flights.sort((a, b)=> a.flight.price.total.amount - b.flight.price.total.amount)
+            }
+        },
+        descendingPriceSorting: (state) =>{
+            if(state.filteredFlights.length > 0){
+                state.filteredFlights = state.filteredFlights.sort((a, b)=> b.flight.price.total.amount - a.flight.price.total.amount)
+            } else {
+                state.filteredFlights = state.flights.result.flights.sort((a, b)=> b.flight.price.total.amount - a.flight.price.total.amount)
+            }
+        },
+        byTimeSorting: (state) =>{
+            if(state.filteredFlights.length > 0){
+                state.filteredFlights = state.filteredFlights.sort((a, b)=>
+                    a.flight.legs.reduce((item, current) => item.duration + current.duration)
+                    -
+                    b.flight.legs.reduce((item, current) => item.duration + current.duration))
+            } else {
+                state.filteredFlights = state.flights.result.flights.sort((a, b)=>
+                    a.flight.legs.reduce((item, current) => item.duration + current.duration)
+                    -
+                    b.flight.legs.reduce((item, current) => item.duration + current.duration))
+            }
+        },
 
 
     }
 })
 
-export const {priceMinLimitFilter, priceMaxLimitFilter, carriersFilter, withoutTransferFilter, oneTransferFilter} = filterSlice.actions
+export const {
+    priceMinLimitFilter,
+    priceMaxLimitFilter,
+    carriersFilter,
+    withoutTransferFilter,
+    oneTransferFilter,
+    ascendingPriceSorting,
+    descendingPriceSorting,
+    byTimeSorting
+} = filterSlice.actions
 
 export default filterSlice.reducer

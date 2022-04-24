@@ -1,16 +1,13 @@
 import React from 'react';
-import {useSelector} from "react-redux";
 
-const TransferFilter = ({settransferCount}) => {
-
-    const flights = useSelector(state => state.filter.flights.result.flights)
+const TransferFilter = ({setTransferCount}) => {
 
     const handleInputChange = (e) => {
         e.target.checked
         ?
-            settransferCount(arr => [...arr, e.target.name])
+            setTransferCount(arr => [...arr, e.target.name])
             :
-            settransferCount(arr => arr.filter(transferCount => transferCount !== e.target.name ))
+            setTransferCount(arr => arr.filter(transferCount => transferCount !== e.target.name ))
     }
 
 
