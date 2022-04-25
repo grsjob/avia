@@ -1,0 +1,70 @@
+.flightList__item {
+  margin-bottom: 2rem;
+}
+
+.flightCart {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  color: #000000;
+
+  &__header {
+    background-color: blue;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #FFFFFF;
+  }
+
+  &__price {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+  }
+
+  &__forward {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+  }
+
+  &__back {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+  }
+
+  &__airports {
+    font-size: 18px;
+    line-height: 27px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.price {
+  &__totalPrice {
+    font-size: 18px;
+    line-height: 27px;
+  }
+
+  &__clarification {
+    font-size: 8px;
+    line-height: 12px;
+  }
+}
+
+.departure {
+  &__airportUid {
+    color: cadetblue;
+  }
+}
+
+.arrival{
+  &__airportUid {
+    color: cadetblue;
+  }
+}
