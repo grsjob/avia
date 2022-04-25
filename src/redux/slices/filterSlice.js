@@ -8,6 +8,20 @@ const initialState = {
 
 }
 
+const checkingFilteredState = (state, newFilteredFlights, initialFilteredFlight) => {
+
+    if (state.filteredFlights.length > 0) {
+        if (newFilteredFlights.length === state.filteredFlights.length) {
+            state.filteredFlights = initialFilteredFlight
+        } else {
+            state.filteredFlights = newFilteredFlights
+        }
+    } else {
+        state.filteredFlights = initialFilteredFlight
+    }
+
+}
+
 export const filterSlice = createSlice({
     name: 'filter',
     initialState,
@@ -19,15 +33,7 @@ export const filterSlice = createSlice({
             let initialFilteredFlight = state.flights.result.flights.filter(
                 item => Number(item.flight.price.total.amount) >= Number(action.payload))
 
-            if (state.filteredFlights.length > 0) {
-                if (newFilteredFlights.length === state.filteredFlights.length) {
-                    state.filteredFlights = initialFilteredFlight
-                } else {
-                    state.filteredFlights = newFilteredFlights
-                }
-            } else {
-                state.filteredFlights = initialFilteredFlight
-            }
+            checkingFilteredState(state, newFilteredFlights, initialFilteredFlight)
         },
         priceMaxLimitFilter: (state, action) => {
             let newFilteredFlights = state.filteredFlights.filter(
@@ -37,15 +43,7 @@ export const filterSlice = createSlice({
                 item => Number(item.flight.price.total.amount) <= Number(action.payload))
 
 
-            if (state.filteredFlights.length > 0) {
-                if (newFilteredFlights.length === state.filteredFlights.length) {
-                    state.filteredFlights = initialFilteredFlight
-                } else {
-                    state.filteredFlights = newFilteredFlights
-                }
-            } else {
-                state.filteredFlights = initialFilteredFlight
-            }
+            checkingFilteredState(state, newFilteredFlights, initialFilteredFlight)
         },
         carriersFilter: (state, action) => {
             let newFilteredFlights = state.filteredFlights.filter(
@@ -54,37 +52,30 @@ export const filterSlice = createSlice({
             let initialFilteredFlight = state.flights.result.flights.filter(
                 item => action.payload.includes(item.flight.carrier.caption))
 
-            if (state.filteredFlights.length > 0) {
-                if (newFilteredFlights.length === state.filteredFlights.length) {
-                    state.filteredFlights = initialFilteredFlight
-                } else {
-                    state.filteredFlights = newFilteredFlights
-                }
-            } else {
-                state.filteredFlights = initialFilteredFlight
-            }
+            checkingFilteredState(state, newFilteredFlights, initialFilteredFlight)
         },
         withoutTransferFilter: (state) => {
-            if (state.filteredFlights.length > 0) {
-                state.filteredFlights = state.filteredFlights.filter(
-                    route => route.flight.legs[0].segments.length === 1
-                        && route.flight.legs[1].segments.length === 1)
-            } else {
-                state.filteredFlights = state.flights.result.flights.filter(
-                    route => route.flight.legs[0].segments.length === 1
-                        && route.flight.legs[1].segments.length === 1)
-            }
+            let newFilteredFlights = state.filteredFlights.filter(
+                route => route.flight.legs[0].segments.length === 1
+                    && route.flight.legs[1].segments.length === 1)
+
+            let initialFilteredFlight = state.flights.result.flights.filter(
+                route => route.flight.legs[0].segments.length === 1
+                    && route.flight.legs[1].segments.length === 1)
+
+
+            checkingFilteredState(state, newFilteredFlights, initialFilteredFlight)
         },
         severalTransfersFilter: (state) => {
-            if (state.filteredFlights.length > 0) {
-                state.filteredFlights = state.filteredFlights.filter(
-                    route => route.flight.legs[0].segments.length > 1
-                        && route.flight.legs[1].segments.length > 1)
-            } else {
-                state.filteredFlights = state.flights.result.flights.filter(
-                    route => route.flight.legs[0].segments.length > 1
-                        && route.flight.legs[1].segments.length > 1)
-            }
+            let newFilteredFlights = state.filteredFlights.filter(
+                route => route.flight.legs[0].segments.length > 1
+                    && route.flight.legs[1].segments.length > 1)
+
+            let initialFilteredFlight = state.flights.result.flights.filter(
+                route => route.flight.legs[0].segments.length > 1
+                    && route.flight.legs[1].segments.length > 1)
+
+            checkingFilteredState(state, newFilteredFlights, initialFilteredFlight)
         },
         ascendingPriceSorting: (state) => {
             if (state.filteredFlights.length > 0) {
@@ -117,6 +108,9 @@ export const filterSlice = createSlice({
                     b.flight.legs.reduce((item, current) => item.duration + current.duration))
             }
         },
+        resetFilteredArray: (state) => {
+            state.filteredFlights = []
+        }
 
 
     }
@@ -130,7 +124,8 @@ export const {
     severalTransfersFilter,
     ascendingPriceSorting,
     descendingPriceSorting,
-    byTimeSorting
+    byTimeSorting,
+    resetFilteredArray,
 } = filterSlice.actions
 
 export default filterSlice.reducer

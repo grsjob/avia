@@ -1,7 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import style from './flight-list.module.css'
 import FlightCart from "../flight-cart/flight-cart";
+import ErrorFallback from '../ErrorFallback/ErrorFallback'
+import {ErrorBoundary} from "react-error-boundary";
+import {resetFilteredArray} from "../../redux/slices/filterSlice";
 
 
 const FlightList = () => {
@@ -10,11 +13,10 @@ const FlightList = () => {
     const flights = useSelector((state) => state.filter.flights.result.flights)
     const filteredFlights = useSelector((state) => state.filter.filteredFlights)
     const statusFilteredFlightsArr = useSelector((state) => state.app.statusFilteredFlightsArr)
-
+    const dispatch = useDispatch()
     useEffect(() => {
 
         if (statusFilteredFlightsArr === 'filterError') {
-            console.log(statusFilteredFlightsArr)
             return (
                 <div className="alert alert-warning" role="alert">
                     Некорректный фильтр. Нет элементов, соответствующих выбранным параметрам.
@@ -35,27 +37,35 @@ const FlightList = () => {
             {
                 statusFilteredFlightsArr === 'filterError'
                     ?
-                    <div >
+                    <div>
                         <div className={style.alertTitle + 'alert alert-danger'} role="alert">
                             Некорректный фильтр. Нет элементов, соответствующих выбранным параметрам.
                         </div>
                     </div>
 
                     :
-                    <ul className={style.flightList}>
-                        {
-                            visibleFlights.map(route => {
-                                return <li key={route.flightToken}><FlightCart flight={route.flight}/></li>
-                            })
-                        }
-                        {
-                            filteredFlights.length === visibleFlights.length
-                                ?
-                                null
-                                :
-                                <button onClick={() => setCount(count + 2)}>Показать еще</button>
-                        }
-                    </ul>
+                    <ErrorBoundary
+                        FallbackComponent={ErrorFallback}
+                        onReset={() => {
+                            dispatch(resetFilteredArray())
+                        }}
+                    >
+                        <ul className={style.flightList}>
+                            {
+                                visibleFlights.map(route => {
+                                    return <li key={route.flightToken}><FlightCart flight={route.flight}/></li>
+                                })
+                            }
+                            {
+                                filteredFlights.length === visibleFlights.length
+                                    ?
+                                    null
+                                    :
+                                    <button onClick={() => setCount(count + 2)}>Показать еще</button>
+                            }
+                        </ul>
+                    </ErrorBoundary>
+
             }
 
         </>
