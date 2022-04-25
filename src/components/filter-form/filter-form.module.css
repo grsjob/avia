@@ -1,0 +1,13 @@
+.filtersForm{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    flex: 0 1 auto;
+    padding: 1.5rem 1.5rem;
+
+}
+
+.filtersForm__buttonSubmit{
+    font-size: 18px;
+    line-height: 27px;
+}

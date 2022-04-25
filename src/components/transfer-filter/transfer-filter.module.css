@@ -1,0 +1,15 @@
+.transfersFilters__title {
+  font-weight: 700;
+}
+
+.transfersFilters__list {
+  list-style: none;
+  margin: 0 0 2rem 0;
+  padding: 0;
+}
+
+.transfersFilters__input {
+  margin-right: 5px;
+}
+
+/*# sourceMappingURL=transfer-filter.module.css.map */

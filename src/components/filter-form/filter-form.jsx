@@ -10,10 +10,11 @@ import {
     descendingPriceSorting,
     byTimeSorting
 } from "../../redux/slices/filterSlice";
-import MinMaxFilter from "../min-max-filter/min-max-filter";
+import PriceFilter from "../price-filter/price-filter";
 import CarriersFilter from "../carriers-filter/carriers-filter";
 import TransferFilter from "../transfer-filter/transfer-filter";
 import Sort from "../sort/sort";
+import style from "./filter-form.module.css";
 
 const FilterForm = () => {
     const [minValue, setMinValue] = useState('');
@@ -61,15 +62,16 @@ const FilterForm = () => {
 
 
     return (
-        <form onSubmit={handlerSubmit}>
-            <MinMaxFilter
+        <form onSubmit={handlerSubmit} className={style.filtersForm}>
+            <Sort setSorting={setSorting}/>
+            <TransferFilter settransferCount={setTransferCount}/>
+            <PriceFilter
                 setMinValue={setMinValue}
                 setMaxValue={setMaxValue}
             />
             <CarriersFilter setSelectedCarriers={setSelectedCarriers}/>
-            <TransferFilter settransferCount={setTransferCount}/>
-            <Sort setSorting={setSorting}/>
-            <button type='submit'>Отфильтровать</button>
+
+            <button className={style.filtersForm__buttonSubmit} type='submit'>Отфильтровать</button>
         </form>
     );
 };

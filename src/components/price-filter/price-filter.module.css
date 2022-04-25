@@ -1,0 +1,15 @@
+.priceFilter {
+  margin-bottom: 2rem;
+}
+.priceFilter__description {
+  display: flex;
+}
+.priceFilter__input {
+  flex-grow: 1;
+  margin-left: 5px;
+}
+.priceFilter__title {
+  font-weight: 700;
+}
+
+

@@ -1,0 +1,14 @@
+.sorting__title {
+  font-weight: 700;
+}
+
+.sorting__list {
+  list-style: none;
+  margin: 0 0 2rem 0;
+  padding: 0;
+}
+
+.sorting__input {
+  margin-right: 5px;
+}
+

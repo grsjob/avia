@@ -1,4 +1,5 @@
 import React from 'react';
+import style from './transfer-filter.module.css'
 
 const TransferFilter = ({setTransferCount}) => {
 
@@ -12,20 +13,23 @@ const TransferFilter = ({setTransferCount}) => {
 
 
     return (
-        <ul>
-            <li>
-                <label>
-                    <input type='checkbox' name='oneTransfer' onChange={handleInputChange}/>
-                    1 пересадка
-                </label>
-            </li>
-            <li>
-                <label>
-                    <input type='checkbox' name='withoutTransfer' onChange={handleInputChange}/>
-                    без пересадок
-                </label>
-            </li>
-        </ul>
+        <fieldset className='transfersFilters'>
+            <p className={style.transfersFilters__title}>Фильтровать</p>
+            <ul className={style.transfersFilters__list}>
+                <li>
+                    <label>
+                        <input className={style.transfersFilters__input} type='checkbox' name='oneTransfer' onChange={handleInputChange}/>
+                        - 1 пересадка
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input className={style.transfersFilters__input} type='checkbox' name='withoutTransfer' onChange={handleInputChange}/>
+                        - без пересадок
+                    </label>
+                </li>
+            </ul>
+        </fieldset>
     );
 };
 

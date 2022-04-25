@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {getAllCarriers} from "../../redux/slices/filterSlice";
+import style from './flight-list.module.css'
 
 
 const FlightList = () => {
@@ -15,7 +16,7 @@ const FlightList = () => {
 
 
     return (
-        <ol>
+        <ul className={style.flightList}>
             {
                 filteredFlights.length > 0 ?
                     filteredFlights.map(route => {
@@ -37,7 +38,7 @@ const FlightList = () => {
 
 
             {/*<button onClick={() => setCount(count + 2)}>Показать еще</button>*/}
-        </ol>
+        </ul>
     );
 };
 
