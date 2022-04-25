@@ -5,7 +5,7 @@ import {
     priceMinLimitFilter,
     carriersFilter,
     withoutTransferFilter,
-    oneTransferFilter,
+    severalTransfersFilter,
     ascendingPriceSorting,
     descendingPriceSorting,
     byTimeSorting
@@ -41,11 +41,11 @@ const FilterForm = () => {
             dispatch(carriersFilter(selectedCarriers))
         }
 
-        if(transferCount.includes('withoutTransfer')){
+        if(transferCount.includes('withoutTransfers')){
             dispatch((withoutTransferFilter()))
         }
-        if(transferCount.includes('oneTransfer')){
-            dispatch((oneTransferFilter()))
+        if(transferCount.includes('severalTransfers')){
+            dispatch((severalTransfersFilter()))
         }
         switch (sorting){
             case 'ascendingPrice':
@@ -64,7 +64,7 @@ const FilterForm = () => {
     return (
         <form onSubmit={handlerSubmit} className={style.filtersForm}>
             <Sort setSorting={setSorting}/>
-            <TransferFilter settransferCount={setTransferCount}/>
+            <TransferFilter setTransferCount={setTransferCount}/>
             <PriceFilter
                 setMinValue={setMinValue}
                 setMaxValue={setMaxValue}

@@ -43,30 +43,42 @@ export const filterSlice = createSlice({
         },
         withoutTransferFilter : (state) =>{
             if (state.filteredFlights.length > 0) {
-                state.filteredFlights = state.filteredFlights.filter(route => route.flight.legs[0].segments.length === 1)
+                state.filteredFlights = state.filteredFlights.filter(
+                    route => route.flight.legs[0].segments.length === 1
+                        &&  route.flight.legs[1].segments.length === 1)
             } else {
-                state.filteredFlights = state.flights.result.flights.filter(route => route.flight.legs[0].segments.length === 1)
+                state.filteredFlights = state.flights.result.flights.filter(
+                    route => route.flight.legs[0].segments.length === 1
+                        &&  route.flight.legs[1].segments.length === 1)
             }
         },
-        oneTransferFilter : (state) =>{
+        severalTransfersFilter : (state) =>{
             if (state.filteredFlights.length > 0) {
-                state.filteredFlights = state.filteredFlights.filter(route => route.flight.legs[0].segments.length === 2)
+                state.filteredFlights = state.filteredFlights.filter(
+                    route => route.flight.legs[0].segments.length > 1
+                        &&  route.flight.legs[1].segments.length > 1)
             } else {
-                state.filteredFlights = state.flights.result.flights.filter(route => route.flight.legs[0].segments.length === 2)
+                state.filteredFlights = state.flights.result.flights.filter(
+                    route => route.flight.legs[0].segments.length > 1
+                        &&  route.flight.legs[1].segments.length > 1)
             }
         },
         ascendingPriceSorting: (state) =>{
             if(state.filteredFlights.length > 0){
-                state.filteredFlights = state.filteredFlights.sort((a, b)=> a.flight.price.total.amount - b.flight.price.total.amount)
+                state.filteredFlights = state.filteredFlights.sort((a, b)=>
+                    a.flight.price.total.amount - b.flight.price.total.amount)
             } else {
-                state.filteredFlights = state.flights.result.flights.sort((a, b)=> a.flight.price.total.amount - b.flight.price.total.amount)
+                state.filteredFlights = state.flights.result.flights.sort((a, b)=>
+                    a.flight.price.total.amount - b.flight.price.total.amount)
             }
         },
         descendingPriceSorting: (state) =>{
             if(state.filteredFlights.length > 0){
-                state.filteredFlights = state.filteredFlights.sort((a, b)=> b.flight.price.total.amount - a.flight.price.total.amount)
+                state.filteredFlights = state.filteredFlights.sort((a, b)=>
+                    b.flight.price.total.amount - a.flight.price.total.amount)
             } else {
-                state.filteredFlights = state.flights.result.flights.sort((a, b)=> b.flight.price.total.amount - a.flight.price.total.amount)
+                state.filteredFlights = state.flights.result.flights.sort((a, b)=>
+                    b.flight.price.total.amount - a.flight.price.total.amount)
             }
         },
         byTimeSorting: (state) =>{
@@ -92,7 +104,7 @@ export const {
     priceMaxLimitFilter,
     carriersFilter,
     withoutTransferFilter,
-    oneTransferFilter,
+    severalTransfersFilter,
     ascendingPriceSorting,
     descendingPriceSorting,
     byTimeSorting

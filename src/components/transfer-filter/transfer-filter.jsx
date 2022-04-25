@@ -18,13 +18,13 @@ const TransferFilter = ({setTransferCount}) => {
             <ul className={style.transfersFilters__list}>
                 <li>
                     <label>
-                        <input className={style.transfersFilters__input} type='checkbox' name='oneTransfer' onChange={handleInputChange}/>
+                        <input className={style.transfersFilters__input} type='checkbox' name='severalTransfers' onChange={handleInputChange}/>
                         - 1 пересадка
                     </label>
                 </li>
                 <li>
                     <label>
-                        <input className={style.transfersFilters__input} type='checkbox' name='withoutTransfer' onChange={handleInputChange}/>
+                        <input className={style.transfersFilters__input} type='checkbox' name='withoutTransfers' onChange={handleInputChange}/>
                         - без пересадок
                     </label>
                 </li>
