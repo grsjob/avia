@@ -14,11 +14,11 @@ const PriceFilter = ({setMinValue, setMaxValue}) => {
             <p className={style.priceFilter__title}>Цена</p>
             <label className={style.priceFilter__description}>
                 От
-                <input className={style.priceFilter__input} onChange={handleChangeMinValue}/>
+                <input className={style.priceFilter__input} placeholder='0' onChange={handleChangeMinValue}/>
             </label>
             <label className={style.priceFilter__description}>
                 До
-                <input className={style.priceFilter__input} onChange={handleChangeMaxValue}/>
+                <input className={style.priceFilter__input} placeholder='1000000' onChange={handleChangeMaxValue}/>
             </label>
         </fieldset>
     );

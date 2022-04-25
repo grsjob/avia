@@ -1,43 +1,35 @@
 import React, {useEffect, useState} from 'react';
-import {useDispatch, useSelector} from "react-redux";
-import {getAllCarriers} from "../../redux/slices/filterSlice";
+import {useSelector} from "react-redux";
 import style from './flight-list.module.css'
+import FlightCart from "../flight-cart/flight-cart";
 
 
 const FlightList = () => {
-    // const [count, setCount] = useState(1)
-    // let [visibleFlights, setvisibleFlights] = useState([])
+    const [count, setCount] = useState(1)
+    let [visibleFlights, setvisibleFlights] = useState([])
     const flights = useSelector((state) => state.filter.flights.result.flights)
     const filteredFlights = useSelector((state) => state.filter.filteredFlights)
 
-    // useEffect(() => {
-    //     setvisibleFlights(flights.filter((item, index) => index <= count))
-    // }, [count]);
+    useEffect(() => {
+
+        filteredFlights.length > 0 ?
+            setvisibleFlights(filteredFlights.filter((item, index) => index <= count))
+            :
+            setvisibleFlights(flights.filter((item, index) => index <= count))
+
+    }, [count, flights, filteredFlights]);
 
 
     return (
         <ul className={style.flightList}>
             {
-                filteredFlights.length > 0 ?
-                    filteredFlights.map(route => {
-                        return <li
-                            key={route.flightToken}>
-                            {route.flight.price.total.amount}
-                            {route.flight.carrier.caption}
-                        </li>
-                    })
-                    :
-                    flights.map(route => {
-                        return <li
-                            key={route.flightToken}>
-                            {route.flight.price.total.amount}
-                            {route.flight.carrier.caption}
-                        </li>
+                visibleFlights.map(route => {
+                        return<li key={route.flightToken}><FlightCart flight={route.flight}/></li>
                     })
             }
 
 
-            {/*<button onClick={() => setCount(count + 2)}>Показать еще</button>*/}
+            <button onClick={() => setCount(count + 2)}>Показать еще</button>
         </ul>
     );
 };
