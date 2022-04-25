@@ -72,15 +72,15 @@ const FlightCart = ({flight}) => {
                         <span>
                         {
                             legs[0].segments[segmentsIndexForward]
-                                .arrivalCity.caption || null
+                                .arrivalCity.caption
                             + ", " +
                             legs[0].segments[segmentsIndexForward]
-                                .arrivalAirport.caption  || null
+                                .arrivalAirport.caption
                         }
                         </span>
                         <StyledAirportUid>
                                 {` (${legs[0].segments[segmentsIndexForward]
-                                    .arrivalAirport.uid || null})`}
+                                    .arrivalAirport.uid})`}
                         </StyledAirportUid>
                     </span>
                 </StyledAirports>
