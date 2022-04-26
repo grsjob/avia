@@ -12,38 +12,19 @@ const FlightList = () => {
     let [visibleFlights, setvisibleFlights] = useState([])
     const flights = useSelector((state) => state.filter.flights.result.flights)
     const filteredFlights = useSelector((state) => state.filter.filteredFlights)
-    const statusFilteredFlightsArr = useSelector((state) => state.app.statusFilteredFlightsArr)
     const dispatch = useDispatch()
     useEffect(() => {
-
-        if (statusFilteredFlightsArr === 'filterError') {
-            return (
-                <div className="alert alert-warning" role="alert">
-                    Некорректный фильтр. Нет элементов, соответствующих выбранным параметрам.
-                </div>
-            )
-        }
-
         filteredFlights.length > 0 ?
             setvisibleFlights(filteredFlights.filter((item, index) => index <= count))
             :
             setvisibleFlights(flights.filter((item, index) => index <= count))
 
-    }, [count, flights, filteredFlights, statusFilteredFlightsArr]);
+    }, [count, flights, filteredFlights]);
 
 
     return (
         <>
             {
-                statusFilteredFlightsArr === 'filterError'
-                    ?
-                    <div>
-                        <div className={style.alertTitle + 'alert alert-danger'} role="alert">
-                            Некорректный фильтр. Нет элементов, соответствующих выбранным параметрам.
-                        </div>
-                    </div>
-
-                    :
                     <ErrorBoundary
                         FallbackComponent={ErrorFallback}
                         onReset={() => {
@@ -65,12 +46,9 @@ const FlightList = () => {
                             }
                         </ul>
                     </ErrorBoundary>
-
             }
-
         </>
-    )
-        ;
+    );
 };
 
 export default FlightList;

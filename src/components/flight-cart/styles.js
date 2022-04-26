@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import clock from '../../assets/clock.png'
 export const StyledFlightCart = styled.div`
   margin-bottom: 2rem;
   display: flex;
@@ -44,6 +44,7 @@ export const StyledBack= styled.div`
   flex-direction: column;
 `
 export const StyledAirports = styled.p`
+  padding: 0 40px;
   font-size: 18px;
   line-height: 27px;
   display: flex;
@@ -55,6 +56,7 @@ export const StyledAirportUid = styled.span`
   color: cadetblue;
 `
 export const StyledTime = styled.p`
+  padding: 0 40px;
   font-size: 18px;
   line-height: 27px;
   display: flex;
@@ -74,14 +76,16 @@ export const StyledTransfer = styled.p`
   color: orange;
   margin: 0;
 `
+
+
 export const StyledCarrier = styled.p`
+  padding: 0 40px;
   font-size: 18px;
   line-height: 27px;
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
   align-items: center;
-  //margin: 0;
   position: relative;
   &:after{
     content: '';
@@ -102,4 +106,18 @@ border: none;
   text-transform: uppercase;
   font-weight: 400;
   padding: 5px 20px;
+`
+
+export const StyledFlightDuration = styled.span`
+  position: relative;
+&:before{
+  content: '';
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  left: -25px;
+  top: 3px;
+  background-image: url(${clock});
+  background-size: cover;
+}
 `

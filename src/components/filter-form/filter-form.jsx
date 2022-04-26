@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {
     priceMaxLimitFilter,
     priceMinLimitFilter,
@@ -15,7 +15,6 @@ import CarriersFilter from "../carriers-filter/carriers-filter";
 import TransferFilter from "../transfer-filter/transfer-filter";
 import Sort from "../sort/sort";
 import style from "./filter-form.module.css";
-import {setStatusFilteredFlightsArr} from "../../redux/slices/appSlice";
 
 const FilterForm = () => {
     const [minValue, setMinValue] = useState('');
@@ -24,7 +23,6 @@ const FilterForm = () => {
     const [transferCount, setTransferCount] = useState([]);
     const [sorting, setSorting] = useState('');
     const dispatch = useDispatch()
-    const filteredFlights = useSelector((state) => state.filter.filteredFlights)
 
     const handlerSubmit = (e) => {
         e.preventDefault()
@@ -58,8 +56,8 @@ const FilterForm = () => {
                 dispatch((byTimeSorting()))
                 break
         }
-    }
 
+    }
 
     return (
         <form onSubmit={handlerSubmit} className={style.filtersForm}>

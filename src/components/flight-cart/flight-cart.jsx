@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {
     StyledAirports, StyledAirportUid,
     StyledBack, StyledCarrier,
-    StyledFlightCart,
+    StyledFlightCart, StyledFlightDuration,
     StyledForward,
     StyledHeader,
     StyledPrice,
@@ -40,7 +40,11 @@ const FlightCart = ({flight}) => {
         let durationInHours = Math.trunc(duration / 60)
         let durationInMinute = duration - durationInHours * 60
         return `${durationInHours} ч ${durationInMinute} мин`
+    }
 
+    const formatDate = (date) =>{
+        let newDate = new Date(date)
+        return newDate.toLocaleString()
     }
     return (
         <StyledFlightCart>
@@ -71,7 +75,7 @@ const FlightCart = ({flight}) => {
                     <span>
                         <span>
                         {
-                            legs[0].segments[segmentsIndexForward]
+                            legs[0].segments[segmentsIndexForward] //TODO klm on time (7,8 item)
                                 .arrivalCity.caption
                             + ", " +
                             legs[0].segments[segmentsIndexForward]
@@ -85,9 +89,9 @@ const FlightCart = ({flight}) => {
                     </span>
                 </StyledAirports>
                 <StyledTime>
-                    <span><span>{legs[0].segments[0].departureDate}</span><span></span></span>
-                    <span>{calcDurationFormard(legs[0].duration)}</span>
-                    <span><span>{legs[0].segments[segmentsIndexForward].arrivalDate}</span><span></span></span>
+                    <span><span>{formatDate(legs[0].segments[0].departureDate)}</span><span></span></span>
+                    <StyledFlightDuration>{calcDurationFormard(legs[0].duration)}</StyledFlightDuration>
+                    <span><span>{formatDate(legs[0].segments[segmentsIndexForward].arrivalDate)}</span><span></span></span>
                 </StyledTime>
                 <StyledTransfer>
                     {
@@ -129,9 +133,9 @@ const FlightCart = ({flight}) => {
                     </span>
                 </StyledAirports>
                 <StyledTime>
-                    <span><span>{legs[1].segments[0].departureDate}</span><span></span></span>
-                    <span>{calcDurationFormard(legs[1].duration)}</span>
-                    <span><span>{legs[1].segments[segmentsIndexBack].arrivalDate}</span><span></span></span>
+                    <span><span>{formatDate(legs[1].segments[0].departureDate)}</span><span></span></span>
+                    <StyledFlightDuration>{calcDurationFormard(legs[1].duration)}</StyledFlightDuration>
+                    <span><span>{formatDate(legs[1].segments[segmentsIndexBack].arrivalDate)}</span><span></span></span>
                 </StyledTime>
                 <StyledTransfer>
                     {
