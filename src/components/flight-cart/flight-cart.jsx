@@ -4,11 +4,13 @@ import {
     StyledBack, StyledCarrier,
     StyledFlightCart, StyledFlightDuration,
     StyledForward,
-    StyledHeader,
+    StyledHeader, StyledLogoBox,
     StyledPrice,
     StyledPriceClarification, StyledSelecteButton, StyledTime,
     StyledTotalPrice, StyledTransfer
 } from "./styles";
+import {aviaCompanes} from '/src/assets/logo/mock-carriers'
+
 
 const FlightCart = ({flight}) => {
     const {carrier, price, legs} = flight
@@ -17,8 +19,9 @@ const FlightCart = ({flight}) => {
     const [segmentsIndexForward, setSegmentsIndexForward] = useState(0);
     const [segmentsIndexBack, setsegmentsIndexBack] = useState(0);
 
+
     useEffect(() => {
-        if(legs[0].segments.length > 1){
+        if (legs[0].segments.length > 1) {
             setSegmentsIndexForward(legs[0].segments.length - 1)
             setTransfersForwardCount(legs[0].segments.length - 1)
         } else {
@@ -26,14 +29,14 @@ const FlightCart = ({flight}) => {
             setTransfersForwardCount(0)
         }
 
-        if(legs[1].segments.length > 1){
+        if (legs[1].segments.length > 1) {
             setsegmentsIndexBack(legs[1].segments.length - 1)
             setTransfersBackCount(legs[1].segments.length - 1)
         } else {
             setsegmentsIndexBack(0)
             setTransfersBackCount(0)
         }
-    }, [transfersForwardCount,segmentsIndexBack,transfersBackCount]);
+    }, [transfersForwardCount, segmentsIndexBack, transfersBackCount]);
 
 
     const calcDurationFormard = (duration) => {
@@ -42,14 +45,29 @@ const FlightCart = ({flight}) => {
         return `${durationInHours} ч ${durationInMinute} мин`
     }
 
-    const formatDate = (date) =>{
+    const formatDate = (date) => {
         let newDate = new Date(date)
         return newDate.toLocaleString()
     }
+
+    // let logos = aviaCompanes.reduce((searchCarrier, company)=>{
+    //     if( company.carrier === carrier.caption){
+    //         searchCarrier = company.carrier
+    //     }
+    //     return <img src={searchCarrier.logo} alt={searchCarrier.carrier} //TODO сделать вывод логотипа
+    //                 style={{ objectFit: 'cover',}}/>
+    // },{})
+    // console.log(logos)
     return (
         <StyledFlightCart>
             <StyledHeader>
-                <div>{carrier.uid}</div>
+                <StyledLogoBox>
+                    {
+                        aviaCompanes
+                            .filter(item => item.carrier === carrier.caption)
+                            .map(item =>item.png)
+                }
+                </StyledLogoBox>
                 <StyledPrice>
                     <StyledTotalPrice>{price.total.amount +
                         ' '
@@ -75,12 +93,21 @@ const FlightCart = ({flight}) => {
                     <span>
                         <span>
                         {
-                            legs[0].segments[segmentsIndexForward] //TODO klm on time (7,8 item)
-                                .arrivalCity.caption
-                            + ", " +
-                            legs[0].segments[segmentsIndexForward]
-                                .arrivalAirport.caption
+                            legs[0].segments[segmentsIndexForward].arrivalAirport.caption
+                                ?
+                                legs[0].segments[segmentsIndexForward].arrivalAirport.caption
+                                :
+                                ''
                         }
+                        </span>
+                        <span>
+                        {
+                            ", "
+                        }
+                            {
+                                legs[0].segments[segmentsIndexForward]
+                                    .arrivalAirport.caption
+                            }
                         </span>
                         <StyledAirportUid>
                                 {` (${legs[0].segments[segmentsIndexForward]
@@ -95,7 +122,7 @@ const FlightCart = ({flight}) => {
                 </StyledTime>
                 <StyledTransfer>
                     {
-                        transfersForwardCount > 0 ? `${transfersForwardCount} пересадка`: null
+                        transfersForwardCount > 0 ? `${transfersForwardCount} пересадка` : null
                     }
                 </StyledTransfer>
                 <StyledCarrier>
@@ -108,9 +135,18 @@ const FlightCart = ({flight}) => {
                 <StyledAirports>
                     <span>
                         <span>
-                               {legs[1].segments[0].departureCity.caption
-                                   + ", " +
-                                   legs[1].segments[0].departureAirport.caption}
+                           {
+                              !!legs[1].segments[0].departureCity.caption
+                                   ?
+                                   legs[1].segments[0].departureCity.caption //TODO проблема в отсутствии свойства
+                                   : ''
+                           }
+                           </span>
+                        <span>
+                            {
+                                ", " +
+                                legs[1].segments[0].departureAirport.caption
+                            }
                         </span>
                         <StyledAirportUid>
                                {` (${legs[1].segments[0].departureAirport.uid})`}
@@ -139,7 +175,7 @@ const FlightCart = ({flight}) => {
                 </StyledTime>
                 <StyledTransfer>
                     {
-                        transfersBackCount > 0 ? `${transfersBackCount} пересадка`: null
+                        transfersBackCount > 0 ? `${transfersBackCount} пересадка` : null
                     }
                 </StyledTransfer>
                 <StyledCarrier>

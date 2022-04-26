@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import clock from '../../assets/clock.png'
+
 export const StyledFlightCart = styled.div`
   margin-bottom: 2rem;
   display: flex;
@@ -38,7 +39,13 @@ export const StyledForward = styled.div`
   flex-wrap: wrap;
   flex-direction: column;
 `
-export const StyledBack= styled.div`
+
+export const StyledLogoBox = styled.div`
+  width: 320px;
+  height: 60px;
+`
+
+export const StyledBack = styled.div`
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
@@ -87,7 +94,8 @@ export const StyledCarrier = styled.p`
   justify-content: flex-start;
   align-items: center;
   position: relative;
-  &:after{
+
+  &:after {
     content: '';
     width: 100%;
     height: 2px;
@@ -98,7 +106,7 @@ export const StyledCarrier = styled.p`
   }
 `
 export const StyledSelecteButton = styled.button`
-border: none;
+  border: none;
   background-color: orange;
   color: #FFFFFF;
   font-size: 20px;
@@ -110,14 +118,15 @@ border: none;
 
 export const StyledFlightDuration = styled.span`
   position: relative;
-&:before{
-  content: '';
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  left: -25px;
-  top: 3px;
-  background-image: url(${clock});
-  background-size: cover;
-}
+
+  &:before {
+    content: '';
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    left: -25px;
+    top: 3px;
+    background-image: url(${clock});
+    background-size: cover;
+  }
 `
