@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/avia/static/css/main.287684b7.css",
+    "main.js": "/avia/static/js/main.75e84dea.js",
+    "static/media/klm.svg": "/avia/static/media/klm.711967b0e5bcd7adc1e0184e41b65e68.svg",
+    "static/media/finnairOyj.svg": "/avia/static/media/finnairOyj.f93fe59307b7512abcad8bf23fe8a61a.svg",
+    "static/media/turkHava.svg": "/avia/static/media/turkHava.0894245679e0fbdd616651897d192c48.svg",
+    "static/media/pegasusHava.svg": "/avia/static/media/pegasusHava.0a10ac8d2db51e79313d03003d541f50.svg",
+    "static/media/airBaltic.svg": "/avia/static/media/airBaltic.b70d26287a806fab2e5fbb71f10ef070.svg",
+    "static/media/airFrance.svg": "/avia/static/media/airFrance.a2653ded49e41c2676c702ee7863cde5.svg",
+    "static/media/Aeroflot.svg": "/avia/static/media/Aeroflot.cb40f1508c35bcece2eccb939fe0abe6.svg",
+    "static/media/clock.png": "/avia/static/media/clock.99fb642696b3a8bb2c54.png",
+    "static/media/brusselsAirlines.svg": "/avia/static/media/brusselsAirlines.eaed8ea29e2fc0bc9c589a4a11615aab.svg",
+    "static/media/alitalia.svg": "/avia/static/media/alitalia.67274bff0251e5b8c9b7f28d38794341.svg",
+    "static/media/lotPolishAirlines.svg": "/avia/static/media/lotPolishAirlines.70088745d1d770583eac04c553701e61.svg",
+    "index.html": "/avia/index.html",
+    "main.287684b7.css.map": "/avia/static/css/main.287684b7.css.map",
+    "main.75e84dea.js.map": "/avia/static/js/main.75e84dea.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.287684b7.css",
+    "static/js/main.75e84dea.js"
+  ]
+}
